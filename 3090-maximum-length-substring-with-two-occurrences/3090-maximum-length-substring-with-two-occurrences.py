@@ -1,15 +1,12 @@
 class Solution:
     def maximumLengthSubstring(self, s: str) -> int:
         n = len(s)
-        count = 0
+        maxLen = 0
         for i in range(n):
-            f = collections.Counter()
-            for j in range(i,n):
-                f[s[j]] += 1
-                if max(f.values())<=2:
-                    count =max(count,j-i+1)
-                else:
+            arr = [0] * 26
+            for j in range(i, n):
+                arr[ord(s[j]) - ord('a')] += 1
+                if arr[ord(s[j]) - ord('a')] == 3:
                     break
-        return count
-
-        
+                maxLen = max(maxLen, j - i + 1)
+        return maxLen
